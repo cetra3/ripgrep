@@ -243,7 +243,7 @@ impl<W: Terminal + Send> Printer<W> {
         let mut last_written = 0;
         for (s, e) in re.find_iter(buf) {
             self.write(&buf[last_written..s]);
-            let _ = self.wtr.fg(color::BRIGHT_RED);
+            let _ = self.wtr.fg(color::RED);
             let _ = self.wtr.attr(Attr::Bold);
             self.write(&buf[s..e]);
             let _ = self.wtr.reset();
@@ -277,7 +277,7 @@ impl<W: Terminal + Send> Printer<W> {
 
     fn write_heading<P: AsRef<Path>>(&mut self, path: P) {
         if self.wtr.supports_color() {
-            let _ = self.wtr.fg(color::BRIGHT_GREEN);
+            let _ = self.wtr.fg(color::GREEN);
             let _ = self.wtr.attr(Attr::Bold);
         }
         self.write_path(path.as_ref());
@@ -289,7 +289,7 @@ impl<W: Terminal + Send> Printer<W> {
 
     fn line_number(&mut self, n: u64, sep: u8) {
         if self.wtr.supports_color() {
-            let _ = self.wtr.fg(color::BRIGHT_BLUE);
+            let _ = self.wtr.fg(color::BLUE);
             let _ = self.wtr.attr(Attr::Bold);
         }
         self.write(n.to_string().as_bytes());
